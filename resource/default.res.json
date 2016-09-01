@@ -1,0 +1,15 @@
+{
+  "groups":[ {
+    "keys":"Bitmap1,description_json",
+    "name":"preload"
+  }],
+  "resources":[ {
+    "name":"Bitmap1",
+    "type":"image",
+    "url":"assets/Bitmap1.png"
+  }, {
+		"name":"description_json",
+		"type":"json",
+		"url":"config/description.json"
+	}]
+}
