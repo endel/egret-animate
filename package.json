@@ -1,0 +1,21 @@
+{
+  "name": "egret-animate",
+  "version": "1.0.0",
+  "description": "A library for bridging Adobe Animate HTML5 export to egret-core",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "uglifyjs --compress -- src/main.js src/utils.js src/DisplayObject.js src/DisplayObjectContainer.js src/Bitmap.js src/Graphics.js src/MovieClip.js src/Shape.js src/Text.js > dist/egret-animate.min.js"
+  },
+  "keywords": [
+    "animate",
+    "egret",
+    "html5",
+    "flash"
+  ],
+  "author": "Endel Dreyer",
+  "license": "MIT",
+  "devDependencies": {
+    "uglify-js": "^2.7.3"
+  }
+}
