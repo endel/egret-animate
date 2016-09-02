@@ -181,21 +181,7 @@
          this.skew.y = value * DEG_TO_RAD;
        }
      },
-     /**
-      * The rotation of the display object, in degrees.
-      * This overrides the radian degrees of the PIXI display objects so that
-      * tweening exported from Flash will work correctly.
-      * @property {Number} rotation
-      */
-     rotation:
-     {
-       enumerable: true,
-       get: function() { return this._rotation * RAD_TO_DEG; },
-       set: function(value)
-       {
-         this._rotation = value * DEG_TO_RAD;
-       }
-     },
+
      /**
       * The x value of the registration, or pivot, point.
       * This property provides parity with CreateJS display objects.
