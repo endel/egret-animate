@@ -23,12 +23,6 @@
       */
      this.skew = new Point();
 
-     /**
-      * Rotation of the display object, with values in radians.
-      * @property {Number} rotation
-      */
-     this._rotation = 0;
-
      this._srB = 0;
      this._srC = 0;
      this._crA = 1;
@@ -63,7 +57,6 @@
 
    var DEG_TO_RAD = Math.PI / 180;
    var RAD_TO_DEG = 180 / Math.PI;
-   var PI_2 = Math.PI * 2;
 
    Object.defineProperties(p, {
      /**
@@ -326,84 +319,6 @@
    {
      // reset the shape mask
      this.mask = shape;
-   };
-
-   p.displayObjectUpdateTransform = function()
-   {
-     // create some matrix refs for easy access
-     var pt = this.parent.worldTransform;
-     var wt = this.worldTransform;
-
-     var scale = this.scale, skew = this.skew, position = this.position, pivot = this.pivot;
-
-     // temporary matrix variables
-     var a, b, c, d, tx, ty,
-     rotY = this._rotation + skew.y,
-     rotX = this._rotation + skew.x;
-
-     // so if rotation is between 0 then we can simplify the multiplication process...
-     if (rotY % PI_2 || rotX % PI_2)
-     {
-       // check to see if the rotation is the same as the previous render. This means we only need to use sin and cos when rotation actually changes
-       if (rotX !== this._cachedRotX || rotY !== this._cachedRotY)
-       {
-         // cache new values
-         this._cachedRotX = rotX;
-         this._cachedRotY = rotY;
-
-         // recalculate expensive ops
-         this._crA = Math.cos(rotY);
-         this._srB = Math.sin(rotY);
-
-         this._srC = Math.sin(-rotX);
-         this._crD = Math.cos(rotX);
-       }
-
-       // get the matrix values of the displayobject based on its transform properties..
-       a  = this._crA * scale.x;
-       b  = this._srB * scale.x;
-       c  = this._srC * scale.y;
-       d  = this._crD * scale.y;
-       tx =  position.x;
-       ty =  position.y;
-
-       // check for pivot.. not often used so geared towards that fact!
-       if (pivot.x || pivot.y)
-       {
-         tx -= pivot.x * a + pivot.y * c;
-         ty -= pivot.x * b + pivot.y * d;
-       }
-
-       // concat the parent matrix with the objects transform.
-       wt.a  = a  * pt.a + b  * pt.c;
-       wt.b  = a  * pt.b + b  * pt.d;
-       wt.c  = c  * pt.a + d  * pt.c;
-       wt.d  = c  * pt.b + d  * pt.d;
-       wt.tx = tx * pt.a + ty * pt.c + pt.tx;
-       wt.ty = tx * pt.b + ty * pt.d + pt.ty;
-     }
-     else
-     {
-       // lets do the fast version as we know there is no rotation..
-       a  = scale.x;
-       d  = scale.y;
-
-       tx = position.x - pivot.x * a;
-       ty = position.y - pivot.y * d;
-
-       wt.a  = a  * pt.a;
-       wt.b  = a  * pt.b;
-       wt.c  = d  * pt.c;
-       wt.d  = d  * pt.d;
-       wt.tx = tx * pt.a + ty * pt.c + pt.tx;
-       wt.ty = tx * pt.b + ty * pt.d + pt.ty;
-     }
-
-     // multiply the alphas..
-     this.worldAlpha = this.alpha * this.parent.worldAlpha;
-
-     // reset the bounds each time this is called!
-     this._currentBounds = null;
    };
 
    p.setTransform = function(x, y, scaleX, scaleY, rotation, skewX, skewY, regX, regY)
