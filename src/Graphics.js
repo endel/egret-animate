@@ -277,7 +277,7 @@
     if (color)
     {
       var rgb = utils.colorToHex(color);
-      var a = alphaFromColor(color);
+      var a = utils.alphaFromColor(color);
       this.beginFill(rgb, a);
     }
     else
@@ -296,7 +296,7 @@
    **/
   p.lf = function(colors, ratios, x0, y0, x1, y1)
   {
-    var alphas = colors.map(function(color) { return alphaFromColor(color); });
+    var alphas = colors.map(function(color) { return utils.alphaFromColor(color); });
     colors = colors.map(function(color) { return utils.colorToHex(color); });
 
     //
@@ -326,7 +326,7 @@
    **/
   p.rf = function(colors, ratios, x0, y0, x1, y1)
   {
-    var alphas = colors.map(function(color) { return alphaFromColor(color); });
+    var alphas = colors.map(function(color) { return utils.alphaFromColor(color); });
     colors = colors.map(function(color) { return utils.colorToHex(color); });
 
     //
@@ -550,24 +550,6 @@
       f.apply(this,params);
     }
     return this;
-  };
-
-  /**
-   * Get the alpha color from color string
-   * @method alphaFromColor
-   * @private
-   * @param {String} color
-   */
-  var alphaFromColor = function(color)
-  {
-    if (/^rgba\(/.test(color))
-    {
-      return parseFloat(color.substring(
-        color.lastIndexOf(',') + 1,
-        color.lastIndexOf(')')
-      ));
-    }
-    return 1;
   };
 
  }());

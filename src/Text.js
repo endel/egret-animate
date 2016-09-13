@@ -82,10 +82,13 @@
     shadow: {
       set: function(shadow)
       {
-        this.style.dropShadow = !!shadow;
+        // this.style.dropShadow = !!shadow;
         if (shadow)
         {
-          this.style.dropShadowColor = shadow.color;
+          if (!this.filters) this.filters = [];
+          this.filters.push(new egret.DropShadowFilter(shadow.distance, shadow.angle, shadow.color, shadow.alpha, shadow.blur, shadow.blur));
+
+          // this.style.dropShadowColor = shadow.color;
           // CreateJS can't handle these
           // this.style.dropShadowAngle = shadow.angle;
           // this.style.dropShadowDistance = shadow.distance;

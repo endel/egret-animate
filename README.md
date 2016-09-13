@@ -7,9 +7,19 @@ A library for bridging Adobe Animate HTML5 export to
 [PixiFlash](https://github.com/CloudKidStudio/PixiFlash) implementation, which
 bridges Adobe Animate HTML5 export to PixiJS.
 
-## Usage
+## Flash Publishing
 
-TODO: usage instructions
+### Install Publishing Helper (optional)
+
+Install the post-publish tool by running **tools/install.jsfl**.
+
+### Flash Setup
+
+1. Make sure you use a Flash "HTML5 Canvas" document type
+2. Change the publishing settings under JavaScript Namespaces
+  * Symbols: lib
+  * Images: images
+  * CreateJS: egretAnimate
 
 ## License
 

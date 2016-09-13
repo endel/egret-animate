@@ -53,6 +53,24 @@
     return color;
   };
 
+  /**
+   * Get the alpha color from color string
+   * @method alphaFromColor
+   * @private
+   * @param {String} color
+   */
+  utils.alphaFromColor = function(color)
+  {
+    if (/^rgba\(/.test(color))
+    {
+      return parseFloat(color.substring(
+        color.lastIndexOf(',') + 1,
+        color.lastIndexOf(')')
+      ));
+    }
+    return 1;
+  };
+
   // Assign to namespace
   egretAnimate.utils = utils;
 

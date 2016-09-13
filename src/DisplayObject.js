@@ -217,77 +217,78 @@
        },
        set: function (mask)
        {
-         var _maskShape = this._maskShape;
-         //if the old mask is a shape and is not the new mask, remove it
-         if (_maskShape && mask != _maskShape)
-         {
-           if(--_maskShape._maskUses < 1)
-           {
-             if(_maskShape.parent)
-               _maskShape.parent.removeChild(_maskShape);
-           }
-           _maskShape.off('graphicsChanged', this.onShapeChanged);
-         }
-         if (this._mask)
-         {
-           //is this safe if a mask is reused multiple places?
-           this._mask.renderable = true;
-         }
-         // If the mask is a shape apply the graphics as the shape
-         if (mask && mask instanceof egretAnimate.Shape)
-         {
-           if(!this.boundMaskChanged)
-           {
-             this.boundMaskChanged = true;
-             this.onShapeChanged = this.onShapeChanged.bind(this);
-             this.onAddedWithMask = this.onAddedWithMask.bind(this);
-           }
-           if(_maskShape != mask)
-           {
-             _maskShape = this._maskShape = mask;
-             ++_maskShape._maskUses;
-             _maskShape.on('graphicsChanged', this.onShapeChanged);
-           }
-           if(mask.graphics.graphicsData.length)
-           {
-             this._mask = mask.graphics;
-           }
-           else
-             this._mask = null;
-         }
-         else
-         {
-           this._mask = mask;
-         }
-         if(!mask)
-         {
-
-           if(this._hasAddedEvent)
-           {
-             this.off("added", this.onAddedWithMask);
-             this._hasAddedEvent = false;
-           }
-         }
-         if (this._mask)
-         {
-           // Wait until we're add and then add the mask
-           // on the same container as this display object
-           if (!this.parent)
-           {
-             //only add event if it isn't already included
-             if(!this._hasAddedEvent)
-             {
-               this._hasAddedEvent = true;
-               this.once("added", this.onAddedWithMask);
-             }
-           }
-           else
-           {
-             if(mask.parent != this.parent)
-               this.parent.addChild(mask);
-           }
-           this._mask.renderable = false;
-         }
+         console.warn("mask not implemented");
+         // var _maskShape = this._maskShape;
+         // //if the old mask is a shape and is not the new mask, remove it
+         // if (_maskShape && mask != _maskShape)
+         // {
+         //   if(--_maskShape._maskUses < 1)
+         //   {
+         //     if(_maskShape.parent)
+         //       _maskShape.parent.removeChild(_maskShape);
+         //   }
+         //   _maskShape.off('graphicsChanged', this.onShapeChanged);
+         // }
+         // if (this._mask)
+         // {
+         //   //is this safe if a mask is reused multiple places?
+         //   this._mask.renderable = true;
+         // }
+         // // If the mask is a shape apply the graphics as the shape
+         // if (mask && mask instanceof egretAnimate.Shape)
+         // {
+         //   if(!this.boundMaskChanged)
+         //   {
+         //     this.boundMaskChanged = true;
+         //     this.onShapeChanged = this.onShapeChanged.bind(this);
+         //     this.onAddedWithMask = this.onAddedWithMask.bind(this);
+         //   }
+         //   if(_maskShape != mask)
+         //   {
+         //     _maskShape = this._maskShape = mask;
+         //     ++_maskShape._maskUses;
+         //     _maskShape.on('graphicsChanged', this.onShapeChanged);
+         //   }
+         //   if(mask.graphics.graphicsData.length)
+         //   {
+         //     this._mask = mask.graphics;
+         //   }
+         //   else
+         //     this._mask = null;
+         // }
+         // else
+         // {
+         //   this._mask = mask;
+         // }
+         // if(!mask)
+         // {
+         //
+         //   if(this._hasAddedEvent)
+         //   {
+         //     this.off("added", this.onAddedWithMask);
+         //     this._hasAddedEvent = false;
+         //   }
+         // }
+         // if (this._mask)
+         // {
+         //   // Wait until we're add and then add the mask
+         //   // on the same container as this display object
+         //   if (!this.parent)
+         //   {
+         //     //only add event if it isn't already included
+         //     if(!this._hasAddedEvent)
+         //     {
+         //       this._hasAddedEvent = true;
+         //       this.once("added", this.onAddedWithMask);
+         //     }
+         //   }
+         //   else
+         //   {
+         //     if(mask.parent != this.parent)
+         //       this.parent.addChild(mask);
+         //   }
+         //   this._mask.renderable = false;
+         // }
        }
      }
    });
