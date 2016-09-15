@@ -5,12 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< Updated upstream
-    "build": "uglifyjs --compress -- src/main.js src/utils.js src/DisplayObject.js src/DisplayObjectContainer.js src/Bitmap.js src/Graphics.js src/MovieClip.js src/Shape.js src/Text.js > dist/egret-animate.min.js"
-=======
     "start": "chokidar 'src/**.js' -c 'npm run build'",
     "build": "uglifyjs --compress -- src/main.js src/utils.js src/DisplayObject.js src/DisplayObjectContainer.js src/Bitmap.js src/Graphics.js src/MovieClip.js src/Shape.js src/Shadow.js src/Sprite.js src/SpriteSheet.js src/Text.js > dist/egret-animate.min.js"
->>>>>>> Stashed changes
   },
   "keywords": [
     "animate",

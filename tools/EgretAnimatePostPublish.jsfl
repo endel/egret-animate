@@ -51,6 +51,26 @@
       return;
     }
 
+    var content = FLfile.read(file);
+
+    //find the 'var lib, images, createj, ss;' line at the end of the file
+    var varFinder = /var (\w+), (\w+), (\w+), (\w+);$/m;
+    //also, the Flash 2014 'var lib, images, createj;'
+    var oldVarFinder = /var (\w+), (\w+), (\w+);$/m;
+
+    var result = varFinder.exec(content) || oldVarFinder.exec(content);
+    if (!result)
+    {
+      // don't throw an error or anything, as the standard post publish file should have caught
+      // this and informed the user.
+      return;
+    }
+
+    if (result[3] !== "egretAnimate") {
+      fl.trace("Not using egretAnimate.\nIf you want to use it, replace 'createjs' by `egretAnimate` on Publishing Settings.");
+      return;
+    }
+
     // Get library items
     var libraryItems = dom.library.items;
     var linkageSymbols = [];
@@ -59,19 +79,6 @@
       if (libraryItems[i].linkageClassName) {
         linkageSymbols.push(libraryItems[i].linkageClassName);
       }
-    }
-
-    var content = FLfile.read(file);
-
-    //find the 'var lib, images, createj, ss;' line at the end of the file
-    var varFinder = /var (\w+), (\w+), (\w+), (\w+);$/m;
-    //also, the Flash 2014 'var lib, images, createj;'
-    var oldVarFinder = /var (\w+), (\w+), (\w+);$/m;
-
-    if(!(varFinder.exec(content) || oldVarFinder.exec(content)))
-    {
-      alert("File was published improperly. Please quit Flash and try publishing again.");
-      return;
     }
 
     // - Extract the properties
