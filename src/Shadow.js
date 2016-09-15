@@ -13,7 +13,7 @@
   {
     this.color = utils.colorToHex(color);
     this.alpha = utils.alphaFromColor(color);
-    this.angle = Math.atan(y / x);
+    this.angle = Math.atan(y / x) || 0;
     this.distance = Math.sqrt(x * x + y * y);
     this.blur = blur;
   };

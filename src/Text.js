@@ -36,7 +36,7 @@
       this._originalX = this.x;
     }
     if (this.textAlign === egret.HorizontalAlign.CENTER) {
-      this.x = this._originalX + this.parent.nominalBounds.x;
+      this.x = this._originalX - this.parent.nominalBounds.width / 2;
       this.width = this.parent.nominalBounds.width;
     }
   };
@@ -85,8 +85,12 @@
         // this.style.dropShadow = !!shadow;
         if (shadow)
         {
-          if (!this.filters) this.filters = [];
-          this.filters.push(new egret.DropShadowFilter(shadow.distance, shadow.angle, shadow.color, shadow.alpha, shadow.blur, shadow.blur));
+          if (!this.filters) {
+            this.filters = [];
+          }
+
+          this.filters.push(new egret.DropShadowFilter(shadow.distance, shadow.angle, shadow.color, shadow.alpha, shadow.blur, shadow.blur, 4));
+          // DropShadowFilter( distance:number, angle:number, color:number, alpha:number, blurX:number, blurY:number, strength:number, quality:number, inner:boolean, knockout:boolean, hideObject:boolean )
 
           // this.style.dropShadowColor = shadow.color;
           // CreateJS can't handle these
